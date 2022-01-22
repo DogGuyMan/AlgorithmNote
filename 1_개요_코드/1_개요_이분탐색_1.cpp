@@ -2,7 +2,7 @@
 using namespace std;
 int arr[1010101] = {
     0,
-};
+}; //sorted
 int N, X;
 int binarySearch(int _Low, int _High, int _T)
 {
