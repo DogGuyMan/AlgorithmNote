@@ -17,10 +17,6 @@
     #include <iostream>
     #include <vector>
     #include <algorithm>
-
-    #include <queue>
-    #include <stack>
-
     #include <string>
     
 
@@ -41,16 +37,18 @@
     3_DP 탑다운 바텀업
         1. 이항계수
         2. 그래프   
+    #include <queue>
+    #include <stack>
             최단경로
             플루이드 알고리즘
         3. 트리
 
 추가해야할것들
-    1_개요
+
+    2_수학자들은 반띵을 사랑했다.  
         1. 문제를 해결하는 방법
             탑다운 
             바텀업
 
-    2_수학자들은 반띵을 사랑했다.  
         트리 자료구조 특히 힙
 
