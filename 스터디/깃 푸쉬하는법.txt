@@ -1,0 +1,4 @@
+git remote add origin https://github.com/DogGuyMan/algorithm_note.git
+git branch -M algorithm_CP1
+git pull origin algorithm_CP1
+git checkout algorithm_CP1
