@@ -2,6 +2,10 @@ from re import M
 
 ORDER = True
 
+# 단, 슬라이싱을 쓸때 END값을
+# 우리가 일반적으로 아는 인덱스에 + 1
+# 즉 더 많이 지정해줘야한다.
+
 
 def Merge(_Start, _Mid, _End, _List):
     Mlist = list()
