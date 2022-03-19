@@ -52,137 +52,42 @@ h3 {
 </p>
 -->
 
-## 2-2 피보나치 수열 & 타일링 문제
+## 2-2 소수판별법
 ### Quest
 #### ❗ 용어 정리
-##### 👉 피보나치?
+##### 👉 에라스토 테네스 체 O(sqrt(n))
+<img src="https://media.giphy.com/media/EKXLomukUTmgfvR0NE/giphy.gif">
+
+**[위키백과 주소](https://ko.wikipedia.org/wiki/%EC%97%90%EB%9D%BC%ED%86%A0%EC%8A%A4%ED%85%8C%EB%84%A4%EC%8A%A4%EC%9D%98_%EC%B2%B4)**
+
+* 에라토스테네스의 체에 맞게 소수를 구함
+1. 만일, PrimeArray[i]가 true이면 i 이후의 i 배수는 약수로 i를 가지고 있는 것이 되므로 i 이후의 i 배수에 대해 false값을 준다.
+2. PrimeArray[i]가 false이면 i는 이미 소수가 아니므로 i의 배수 역시 소수가 아니게 된다. 그러므로 검사할 필요도 없다. 
+3. 또한 i x k (k < i) 까지는 이미 검사되었으므로 
+j시작 값은 i x 2에서 i x i로 개선할 수 있다.
 ```cpp
-#include <iostream>
-#include <algorithm>
+#include <bits/stdc++.h>
 using namespace std;
-
-int N;
-int DP[101010] = {0,};
-
-int fibo(int n)
-{
-    if (n <= 2)
-        return n == 2 ? 1 : n;
-    if (DP[n] != 0)
-        return DP[n];
-    return DP[n] = fibo(n - 1) + fibo(n - 2);
-}
-
-int main()
-{
-    cin >> N;
-    for (int i = 0; i <= N; i++)
-        cout << fibo(i) << '\n';
-}
-```
-
-### 응용문제
-##### 👉 1. 11726번 : 2 x N 타일링
-```cpp
-#include <iostream>
-#define ll long long
-const int mod = 10007;
-using namespace std;
-ll DP[1010];
+vector<bool> isPrime(1000001, true);
 int main()
 {
 	ios::sync_with_stdio(false); cin.tie(NULL);
-	int N; cin >> N;
-	DP[0] = 0; DP[1] = 1; DP[2] = 2; DP[3] = 3;
-	for (int i = 4; i <= N; i++)
-		DP[i] = (DP[i - 1] % mod + DP[i - 2] % mod) % mod;
-	cout << DP[N] << '\n';
-	return 0;
-}
-```
-##### 👉 2. 11726번 : 2 x N 타일링
-```cpp
-#include <iostream>
-#include <algorithm>
-#define mod 10007
-using namespace std;
-int DP[1010];
-int main()
-{
-	ios::sync_with_stdio(false); cin.tie(NULL);
-	int N; cin >> N;
-	DP[0] = 0; DP[1] = 1; DP[2] = 3; DP[3] = 5;
-	DP[4] = 11;
-	for (int i = 5; i <= N; i++){
-		DP[i] = ((DP[i-1]%mod) + (2 * DP[i-2])%mod)%mod;
+	int N, M; cin >> N >> M;
+	isPrime[1] = false;
+	for (int i = 2; i * i <= M; ++i) {
+		if (isPrime[i])
+			for (int j = i * i; j <= M; j += i)
+				isPrime[j] = false;
 	}
-	cout << DP[N] << '\n';
-	return 0;
-}
-
-```
-##### 👉 3. 2133번 : 타일채우기
-```
-점화식 : 
-    n
-        0 -> 1
-        1 -> 0
-        2 -> 3
-    dp[n] = 3 * dp[n-2] + 2(dp[n-4] + dp[n-6] ... + dp[0]) 
-```
-
-##### 👉 4.  : 타일채우기 3
-
-1. 시그마로 이루어진 부분은 DP화 시킬수가 있다.
-   1. 그렇다면 DP배열을 1개가 아닌 여러개로 설정해서 풀면 빠를수 있을것이다.
-    2. 그래서 다음문제는 시간초과를 막기위해
-    3. 이중 DP를 사용했다.
-        * 이중DP 가 될 시그마의 점화식을 추론할때
-           * 컴퓨터를 믿어도 괜찮을것이다 
-           * 컴퓨터로 점화식을 찾자 = 규칙성을 찾자
-```cpp
-#include <iostream>
-#include <algorithm>
-#define ll long long
-using namespace std;
-
-const int MAX = 1e6 + 1;
-const int MOD = 1000000007;
-
-ll DP[MAX][2] = {
-    {0, 0},
-};
-ll N;
-
-ll F_DP(ll _N)
-{
-    if (DP[_N][0] != 0)
-        return DP[_N][0];
-    for (int i = 3; i <= _N; i++)
-    {
-        DP[i][0] = (DP[i - 1][0] * 2 + DP[i - 2][0] * 3) % MOD;
-        DP[i][1] = (DP[i - 1][1] + (DP[i - 3][0] * 2)) % MOD;
-        DP[i][0] = (DP[i][0] + DP[i][1]) % MOD;
-    }
-    return DP[_N][0];
-}
-
-int main()
-{
-    ios::sync_with_stdio(false);
-    cin.tie(NULL);
-    DP[0][0] = 0;
-    DP[1][0] = 2;
-    DP[2][0] = 7;
-    DP[2][1] = 2;
-    cin >> N;
-    cout << F_DP(N) << '\n';
-    return 0;
+	for (int i = N; i <= M; ++i)
+		if (isPrime[i])
+			cout << i << '\n';
 }
 ```
+##### 👉 페르마 테스트
 
-* 2차원 다이나믹 프로그래밍
 
+### 참고
 #### 1. 주니온
 #### 2. 알고리즘 도감
 #### 3. 안경잡이 개발자 : 동빈나
@@ -190,3 +95,9 @@ int main()
   <img src="../2022-02-03-14-55-34.png" alt="text" width=400px />
   <br>본 글에서 사용하는 GIF는 알고리즘 앱 자동재생
 </p>
+
+```CS
+float GetAccelerration(){
+
+}
+```

@@ -1,0 +1,31 @@
+[백준 11049번] 행렬곱셈 순서
+
+첫줄 행렬 개수
+둘째줄 1 <= row, col <= 500
+Knapsack 문제 같은 경우 n개의 물건을 고려하는 상황에서 
+가방 용량을 늘리게 되면 row를 n으로 고정시키고 
+column을 하나씩 늘려가면서 계산하면 되는데,
+이 문제의 경우는 n개 행렬의 곱을 고려하는 상황이면 
+특정 row나 column을 고정시키지 않고 
+부분문제 단계 당 "하나의 대각선" 상에서 계산을 진행하게 됩니다.
+
+입력크기를 알때,
+N = int(sys.stdin.readline())
+A = [list(map(int, sys.stdin.readline().split())) for _ in range(N)]
+
+[백준 5639] 이진 검색 트리
+입력크기를 모를때 한줄로 받는방법
+L = list(map(int, input().split()))
+
+또는 EOF 까지
+while True:
+	try:
+    	a, b = map(int, input().split())
+        print(a+b)
+    except:
+    	break
+
+cpp 에선 다음과 같다.
+while (cin >> num) {
+		tree[inputIdx++] = num;
+	}

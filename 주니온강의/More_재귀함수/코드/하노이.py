@@ -14,7 +14,7 @@ moveList = list()
 def hanoiCount(_n):
     if _n == 1:
         return DP[1]
-    for i in range(_n + 1):
+    for i in range(2, _n + 1):
         DP[i] = 2 * DP[i-1] + 1
     return DP[_n]
 
