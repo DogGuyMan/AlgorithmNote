@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "target": "ES5",                                  /* Set the JavaScript language version for emitted JavaScript and include compatible library declarations. */
+    // "lib": [],                                        /* Specify a set of bundled library declaration files that describe the target runtime environment. */
+
+    /* Modules */
+    
+    "module": "commonjs",                                /* Specify what module code is generated. */
+    "rootDir": "./src",                                  /* Specify the root folder within your source files. */
+    "moduleResolution": "node",                       /* Specify how TypeScript looks up a file from a given module specifier. */
+
+    /* Emit */
+    "sourceMap": true,                                /* Create source map files for emitted JavaScript files. */
+    "esModuleInterop": true,                             /* Emit additional JavaScript to ease support for importing CommonJS modules. This enables
+    /* Type Checking */
+    "strict": true,                                      /* Enable all strict type-checking options. */
+  },
+  //모든 스크립트는 src 로 넣은 구조여야 한다
+  "exclude" : ["node_modules"],
+}
