@@ -1,6 +1,6 @@
 import fs = require("fs");
 
-let arr = fs.readFileSync("./randomNumber.txt", "utf-8").toString().trim().split(',').map(x => ~~x);
+let arr = fs.readFileSync("randomNumber.txt", "utf-8").toString().trim().split(',').map(x => ~~x);
 
 function bubble(_inputData : Array<number>) : Array<number> {
     for (let i = _inputData.length-1; i > 0 ; i--){
